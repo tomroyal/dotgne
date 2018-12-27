@@ -1,0 +1,57 @@
+.m50top {
+  margin-top: 50px;
+}
+.topmenu {
+  margin-bottom: 20px;
+}
+.btmpagination {
+  margin-bottom: 20px;
+}
+.mb0 {
+  margin-bottom: 0px!important;
+}
+.paginator {
+  padding: 0.7em;
+}
+.currentpaginate {
+  border: 1px solid #ccc;
+}
+.paginator a:link,
+.paginator a:visited,
+.paginator a:hover,
+.paginator a:active {
+  text-decoration: none;
+}
+input[type="file"] {
+		display: none;
+}
+.message {
+  padding:15px;
+  background-color: lightgoldenrodyellow;
+}
+
+/* Progress bars
+–––––––––––––––––––––––––––––––––––––––––––––––––– */
+.progress-bar-area {
+    margin-top: 20px;
+}
+.progress {
+    display: none;
+    position: relative;
+    width: 100%; height: 15px;
+    background: #C7DA9F;
+    border-radius: 15px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+.bar {
+    position: absolute;
+    top: 0; left: 0;
+    width: 0; height: 15px;
+    background: #85C220;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    font-size: .7em;
+}
+.bar.red { background: tomato; }
