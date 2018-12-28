@@ -13,10 +13,10 @@ include('./inc/skeleton_parts.php');
 $stage = $_POST['s'];
 $show_message = ''; // for errors
 
-// is schema set up? if not, stage 1
+// is schema set up? if not, stage 0
 $pq1 = 'SELECT schema_name FROM information_schema.schemata WHERE schema_name = \'dotgne\'';
 $rs1 = pg_query($con,$pq1);
-if (pg_num_rows($rs1) != 1){
+if (($stage == "") && (pg_num_rows($rs1) != 1)){
   $stage = 0;
 }
 else {
