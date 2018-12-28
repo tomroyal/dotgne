@@ -104,7 +104,7 @@ switch ($stage){
       $newpw = password_hash($_POST['upass'],PASSWORD_DEFAULT);
       $pq1 = 'INSERT INTO dotgne.users
               ("id","email","password","uname") VALUES
-              (0,'.pg_escape_literal(strtolower($_POST['uemail'])).','.pg_escape_literal($newpw).','.pg_escape_literal(uname).')
+              (0,'.pg_escape_literal(strtolower($_POST['uemail'])).','.pg_escape_literal($newpw).','.pg_escape_literal($_POST['uname']).')
               RETURNING id';			
       $rs1 = pg_query($con, $pq1);
       
