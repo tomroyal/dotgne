@@ -16,7 +16,7 @@
       "value": "tbc"
     },
     "BASE_URL": {
-      "description": "The URL at which your app is running, with trailing slash. For example, https://something.herokuapp.com/",
+      "description": "The URL at which your app is running, with trailing slash. For example, https://appname.herokuapp.com/",
       "value": "tbc"
     },
     "IMGIXSOURCE": {

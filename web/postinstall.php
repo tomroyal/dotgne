@@ -65,7 +65,7 @@ switch ($stage){
       
       // set up tables
       $pq1 = 'CREATE TABLE dotgne.users (
-                "id" serial,
+                "id" serial PRIMARY KEY,
                 email text NOT NULL,
                 password text,
                 reset text,
