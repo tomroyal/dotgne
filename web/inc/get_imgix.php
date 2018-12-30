@@ -23,14 +23,7 @@ function getThumbnail($igfile,$igwidth){
 
 // get S3 image URL
 function getS3fullresurl($thefile){
-	$s3 = S3Client::factory([
-		'version' => '2006-03-01',
-		'region' => 'eu-west-1',
-		'credentials' => [
-				'key'    => getenv('AWS_ACCESS_KEY_ID'),
-				'secret' => getenv('AWS_SECRET_ACCESS_KEY')
-		]
-	]);
+	global $s3;
 	try {
 			// fetch presigned url
 			$cmd = $s3->getCommand('GetObject', [
