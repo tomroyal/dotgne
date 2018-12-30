@@ -10,6 +10,7 @@ session_start();
 $con = pg_connect(getenv('DATABASE_URL'));
 
 // common funcs
+include('./inc/s3.php');
 include('./inc/common_funcs.php');
 include('./inc/skeleton_parts.php');
 include('./inc/output_funcs.php');

@@ -7,18 +7,7 @@ session_start();
 // connect db
 $con = pg_connect(getenv('DATABASE_URL'));
 
-// use s3
-use Aws\S3\S3Client;
-use Aws\S3\Exception\S3Exception;
-$s3 = S3Client::factory([
-  'version' => '2006-03-01',
-  'region' => 'eu-west-1',
-  'credentials' => [
-      'key'    => getenv('AWS_ACCESS_KEY_ID'),
-      'secret' => getenv('AWS_SECRET_ACCESS_KEY')
-  ]
-]);
-
+include('./inc/s3.php');
 include('./inc/common_funcs.php');
 
 // what user account are we viewing? Default to 0

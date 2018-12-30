@@ -8,6 +8,9 @@ date_default_timezone_set('Europe/London');
 // connect db
 $con = pg_connect(getenv('DATABASE_URL'));
 
+// s3
+include('./inc/s3.php');
+
 $token = $_REQUEST['t']; // user token for confirmation
 $u = $_REQUEST['u'];
 $f = $_REQUEST['f']; // filename in s3
