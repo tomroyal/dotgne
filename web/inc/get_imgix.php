@@ -4,11 +4,11 @@
 
 function getImgix($igfile,$igwidth){
 	// get a signed image
-	$igbasename = 'dotgne.imgix.net';
+	$igbasename = getenv('IMGIXSOURCE').'.imgix.net';
 	$igbuilder = new Imgix\UrlBuilder($igbasename);
 	$igbuilder->setUseHttps(true);
 	$igbuilder->setSignKey(getenv('IMGIXSIGN'));
-	$igparams = array("w" => $igwidth, "h" => "960", "fit" => "max");
+	$igparams = array("w" => $igwidth, "fit" => "max");
 	$igurl = $igbuilder->createURL($igfile, $igparams);
 	// return
 	return($igurl);
@@ -16,7 +16,7 @@ function getImgix($igfile,$igwidth){
 
 function getImgixDateTime($igfile){
 	// get json meta url
-	$igbasename = 'dotgne.imgix.net';
+	$igbasename = getenv('IMGIXSOURCE').'.imgix.net';
 	$igbuilder = new Imgix\UrlBuilder($igbasename);
 	$igbuilder->setUseHttps(true);
 	$igbuilder->setSignKey(getenv('IMGIXSIGN'));
