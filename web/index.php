@@ -7,6 +7,7 @@ session_start();
 // connect db
 $con = pg_connect(getenv('DATABASE_URL'));
 
+include('./inc/s3.php');
 include('./inc/common_funcs.php');
 
 // what user account are we viewing? Default to 0

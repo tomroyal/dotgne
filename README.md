@@ -13,15 +13,16 @@ The following key features are in place:
 * Paginated image list view
 * Single image view
 * Metadata: Title and Description
-* EXIF dates read and stored
+* EXIF dates read and stored (via Imgix, optional)
+* Secured thumbnail URLs (via Imgix, optional)
 * Multiple levels of privacy, per image:
     * Public
     * Visible to friends, family and the user
     * Visible to family and the user
     * Private to the user only
 * Asynchronous upload to S3
-* Secured thumbnail URLs via Imgix
 * User can create account invitations via keyed URLs
+* Can function to a basic level without Imgix, using createPresignedRequest S3 URLs
 
 While the following are all // TODO:
 
@@ -29,7 +30,6 @@ While the following are all // TODO:
 * Multiple / batch upload and edit
 * Sets / albums, possibly with slideshow
 * Limited-use sharing links via keyed URLs, to images and albums
-* Non-imgix option enabled when no imgix env variable is supplied
 
 ## Example
 
@@ -43,7 +43,11 @@ https://dashboard.heroku.com/new?template=https://github.com/tomroyal/dotgne/mas
 
 Set your environment variables, then click Deploy App. Once deployed, click View to visit the setup script at /postinstall.php
 
-Note that you will need to set your AWS and Imgix environment variables to upload and view images. I will add a full setup guide soon.
+Note that you will need to set your AWS environment variables - AWS_BUCKET, AWS_REGION, AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY to upload and view images. Your bucket will need a suitable CORS - see https://packagist.org/packages/eddturtle/direct-upload for examples.
+
+If you configure an Imgix source, then add IMGIXSOURCE and IMGIXSIGN environment variables you will get much better performance (image thumbnails, EXIF data, correct image rotation, etc). Leaving IMGIXSOURCE as blank, or "tbc", indicates that Imgix should not be used.
+
+I will add a full setup guide soon.
 
 ## License
 

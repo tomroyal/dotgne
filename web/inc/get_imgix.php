@@ -2,21 +2,49 @@
 
 // get an imgix url
 
-function getImgix($igfile,$igwidth){
-	// get a signed image
-	$igbasename = 'dotgne.imgix.net';
-	$igbuilder = new Imgix\UrlBuilder($igbasename);
-	$igbuilder->setUseHttps(true);
-	$igbuilder->setSignKey(getenv('IMGIXSIGN'));
-	$igparams = array("w" => $igwidth, "h" => "960", "fit" => "max");
-	$igurl = $igbuilder->createURL($igfile, $igparams);
+function getThumbnail($igfile,$igwidth){
+	// get a signed image via Imgix, or fallback to an S3 fetch
+	if ((getenv('IMGIXSOURCE') == '') || (getenv('IMGIXSOURCE') == 'tbc')){
+    // imgix disabled, get s3
+		$igurl = getS3fullresurl($igfile);
+  }
+	else {
+		// imgix thumb
+		$igbasename = getenv('IMGIXSOURCE').'.imgix.net';
+		$igbuilder = new Imgix\UrlBuilder($igbasename);
+		$igbuilder->setUseHttps(true);
+		$igbuilder->setSignKey(getenv('IMGIXSIGN'));
+		$igparams = array("w" => $igwidth, "fit" => "max");
+		$igurl = $igbuilder->createURL($igfile, $igparams);
+	};
 	// return
 	return($igurl);
 };
 
+// get S3 image URL
+function getS3fullresurl($thefile){
+	global $s3;
+	try {
+			// fetch presigned url
+			$cmd = $s3->getCommand('GetObject', [
+				'Bucket' => getenv('AWS_BUCKET'),
+				'Key'    => $thefile
+			]);
+			$request = $s3->createPresignedRequest($cmd, '+10 minutes');
+			$presignedUrl = (string) $request->getUri();
+			return($presignedUrl);
+	}
+	catch (S3Exception $e) {
+		error_log('s3 error');
+		return(''); // TODO
+	};
+};
+
+// get EXIF date via Imgix
+
 function getImgixDateTime($igfile){
 	// get json meta url
-	$igbasename = 'dotgne.imgix.net';
+	$igbasename = getenv('IMGIXSOURCE').'.imgix.net';
 	$igbuilder = new Imgix\UrlBuilder($igbasename);
 	$igbuilder->setUseHttps(true);
 	$igbuilder->setSignKey(getenv('IMGIXSIGN'));

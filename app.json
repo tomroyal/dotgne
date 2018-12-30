@@ -7,6 +7,10 @@
       "description": "The name of your S3 bucket - not the path, just the name",
       "value": "tbc"
     },
+    "AWS_REGION": {
+      "description": "The region of your S3 bucket. For example, eu-west-1",
+      "value": "eu-west-1"
+    },
     "AWS_ACCESS_KEY_ID": {
       "description": "AWS access key for a user with read write permissions on your bucket",
       "value": "tbc"
@@ -20,7 +24,7 @@
       "value": "tbc"
     },
     "IMGIXSOURCE": {
-      "description": "The name of your Imgix source",
+      "description": "The name of your Imgix source - leave blank or tbc to use the system without Imgix",
       "value": "tbc"
     },
     "IMGIXSIGN": {
