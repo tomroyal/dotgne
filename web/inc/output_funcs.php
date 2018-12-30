@@ -11,7 +11,7 @@ function draw_pic_fullwidth($dotgne_image){
     // standard - file name in f_url
     $dotgne_remote_name = $dotgne_image['iuser'].'/'.$dotgne_image['f_url'];
   }
-  $dotgne_thumb_url = getImgix($dotgne_remote_name,960);
+  $dotgne_thumb_url = getThumbnail($dotgne_remote_name,960);
   return('<p><img src="'.$dotgne_thumb_url.'" class="u-full-width fwpic"></p>');
 }
 

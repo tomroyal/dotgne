@@ -31,8 +31,14 @@ else {
   $sl_pos = strrpos($f, '/');
   $f_name_only = $sl_pos === false ? $f : substr($f, $sl_pos + 1);
   
-  // get exif date TODO not working
-  $taken_datetime = getImgixDateTime($u.'/'.$f_name_only);
+  // get exif date 
+  if ((getenv('IMGIXSOURCE') == '') || (getenv('IMGIXSOURCE') == 'tbc')){
+    // imgix disabled, so don't attempt date fetch
+    $taken_datetime = 'failed';
+  }
+  else {
+    $taken_datetime = getImgixDateTime($u.'/'.$f_name_only);
+  };
   
   if ($taken_datetime == 'failed'){
     // couldn't read exif date, leave it null
