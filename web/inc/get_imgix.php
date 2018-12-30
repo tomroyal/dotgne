@@ -36,7 +36,7 @@ function getS3fullresurl($thefile){
 	}
 	catch (S3Exception $e) {
 		error_log('s3 error');
-		return('failed'); // TODO
+		return(''); // TODO
 	};
 };
 
