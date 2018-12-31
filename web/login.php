@@ -13,6 +13,12 @@ session_start();
 // connect db
 $con = pg_connect(getenv('DATABASE_URL'));
 
+// do we have mail sending ability? If so, prepare it
+if ((getenv('POSTMARK_KEY') != '') && (getenv('POSTMARK_KEY') != 'tbc')){
+	$can_email = 1;
+	$PMclient = new PostmarkClient(getenv('POSTMARK_KEY'));
+};
+
 // form vars
 
 $stage    = $_POST['s'];
@@ -54,17 +60,49 @@ if ($stage == 1){
   }
   else {
     // fail
-    echo('<p class="alert">Sorry, please try again.</p>');
+    echo('<p class="message">Sorry, please try again.</p>');
     // error_log('failed login');
     showloginform();
   }
 }
+else if ($stage == 2){
+	// offer pass reset form
+	echo('<p>Lost your password? Please enter your email address here and we will send you a reset link</p>');
+	echo('<form method="post">');
+  echo('<label for="e">Email</label>');
+  echo('<p><input class="u-full-width" type="email" placeholder="email@address.com" name="e" id="e" required></p>');
+  echo('<input type="hidden" name="s" value="3">');
+  echo('<p><input class="button-primary" type="submit" value="Reset Password"></p></form>');
+}
+else if ($stage == 3){
+	// attempt pass reset
+	$e = pg_escape_string(trim(strtolower($_POST['e'])));
+  $pq = 'SELECT * FROM dotgne.users WHERE "email" = \''.$e.'\'';
+  $rs = pg_query($con,$pq);
+	if (pg_num_rows($rs) == 1){
+		$thisaccount = pg_fetch_array($rs);
+		$reset_hash = md5($thisaccount['id'].'dotgnepwr'.time());
+		$pq = 'UPDATE dotgne.users SET "reset" = '.pg_escape_literal($reset_hash).' WHERE "email" = \''.$e.'\'';
+	  $rs = pg_query($con,$pq);
+		include('./inc/send_email.php');
+		$message = 'Reset your password here: '.getenv('BASE_URL').'reset/'.$reset_hash.'/';
+		$emailresult = sendEmail($e,'Reset your password',$message);
+	};
+	echo('<p class="message">Thank you. If you have an account, an email has been sent with instructions.</p>');
+	
+}	
 else {
   // show login form
   echo('<h4>Log In</h4>');
   echo('<p>Please log in with your email address and password.');
   showloginform();
-}
+	if ($can_email == 1){
+		// offer email password reset
+		echo('<form method="post">');
+		echo('<input type="hidden" name="s" value="2">');
+	  echo('<p><input class="button" type="submit" value="Reset Password"></p></form>');
+	};
+};
 
 end_skel_row_12();
 include('./html/btm.php');

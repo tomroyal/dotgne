@@ -30,7 +30,15 @@
     "IMGIXSIGN": {
       "description": "The security token for your Imgix source",
       "value": "tbc"
-    }    
+    },
+    "POSTMARK_KEY": {
+      "description": "A valid Postmark API key for sending email - or leave as tbc to disable",
+      "value": "tbc"
+    },
+    "POSTMARK_FROM": {
+      "description": "The email address to be used when sending mail, eg you@domain.com",
+      "value": "tbc"
+    }            
   },
   "formation": {
     "web": {
