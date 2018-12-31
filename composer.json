@@ -2,11 +2,13 @@
   "require" : {
 	  "aws/aws-sdk-php":"~3",
 	  "imgix/imgix-php": "dev-master",
-	  "eddturtle/direct-upload": "*"
+	  "eddturtle/direct-upload": "*",
+    "wildbit/postmark-php":"2.6.*"
   },
   "require-dev": {
     "aws/aws-sdk-php":"~3",
 	  "imgix/imgix-php": "dev-master",
-	  "eddturtle/direct-upload": "*"
+	  "eddturtle/direct-upload": "*",
+    "wildbit/postmark-php":"2.6.*"
   }
 }
