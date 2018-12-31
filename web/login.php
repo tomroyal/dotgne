@@ -4,6 +4,7 @@
 
 require('autoload.php');
 date_default_timezone_set('Europe/London');
+use Postmark\PostmarkClient;
 
 if (isset($_SESSION)){
 	session_destroy();
@@ -16,7 +17,6 @@ $con = pg_connect(getenv('DATABASE_URL'));
 // do we have mail sending ability? If so, prepare it
 if ((getenv('POSTMARK_KEY') != '') && (getenv('POSTMARK_KEY') != 'tbc')){
 	$can_email = 1;
-	use Postmark\PostmarkClient;
 	$PMclient = new PostmarkClient(getenv('POSTMARK_KEY'));
 };
 
