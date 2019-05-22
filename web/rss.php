@@ -74,12 +74,13 @@ $rs1 = pg_query($con, $pq1);
 // setup rss
 
 $rssfeed = '<?xml version="1.0" encoding="ISO-8859-1"?>';
-$rssfeed .= '<rss version="2.0">';
+$rssfeed .= '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">';
 $rssfeed .= '<channel>';
 $rssfeed .= '<title>My RSS feed</title>';
 $rssfeed .= '<link>https://photos.tomroyal.com/rss/'.$dotgne_acc.'/</link>';
 $rssfeed .= '<description>RSS of photos</description>';
 $rssfeed .= '<language>en-gb</language>';
+$rssfeed .= '<atom:link href="https://photos.tomroyal.com/rss/'.$dotgne_acc.'/" rel="self" type="application/rss+xml" />'
     
 // loop
 
@@ -87,12 +88,11 @@ while($dotgne_lister_pic = pg_fetch_array($rs1)){
   // anon item
   $rssfeed .= '<item>';
   $rssfeed .= '<title>' . $dotgne_lister_pic['iid'] . '</title>';
-  $rssfeed .= '<guid>dotgne' . $dotgne_lister_pic['iid'] . '</guid>';
+  $rssfeed .= '<guid isPermaLink="false">dotgne' . $dotgne_lister_pic['iid'] . '</guid>';
   $rssfeed .= '<description>Image ID ' . $dotgne_lister_pic['iid'] . '</description>';
   $rssfeed .= '<link>https://photos.tomroyal.com/user/'.$dotgne_acc.'/'.$dotgne_lister_pic['iid'].'/</link>';
   if ($dotgne_lister_pic['datetaken'] != ""){
-    $rssfeed .= '<pubDate>' . date("D, d M Y H:i:s O", strtotime($dotgne_lister_pic['datetaken'])) . '</pubDate>';
-    
+    $rssfeed .= '<pubDate>' . date("D, d M Y H:i:s O", strtotime($dotgne_lister_pic['datetaken'])) . '</pubDate>';    
   }
   $rssfeed .= '</item>';
 }  
