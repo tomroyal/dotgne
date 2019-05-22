@@ -85,16 +85,33 @@ $rssfeed .= '<atom:link href="https://photos.tomroyal.com/rss/'.$dotgne_acc.'/" 
 // loop
 
 while($dotgne_lister_pic = pg_fetch_array($rs1)){
-  // anon item
-  $rssfeed .= '<item>';
-  $rssfeed .= '<title>' . $dotgne_lister_pic['iid'] . '</title>';
-  $rssfeed .= '<guid isPermaLink="false">dotgne' . $dotgne_lister_pic['iid'] . '</guid>';
-  $rssfeed .= '<description>Image ID ' . $dotgne_lister_pic['iid'] . '</description>';
-  $rssfeed .= '<link>https://photos.tomroyal.com/user/'.$dotgne_acc.'/'.$dotgne_lister_pic['iid'].'/</link>';
-  if ($dotgne_lister_pic['datetaken'] != ""){
-    $rssfeed .= '<pubDate>' . date("D, d M Y H:i:s O", strtotime($dotgne_lister_pic['datetaken'])) . '</pubDate>';    
+  if ($dotgne_lister_pic['privacy'] <= $dotgne_view_level){
+    // item with details
+    // anon item
+    $rssfeed .= '<item>';
+    $rssfeed .= '<title>' . $dotgne_lister_pic['title'] . '</title>';
+    $rssfeed .= '<guid isPermaLink="false">dotgne' . $dotgne_lister_pic['iid'] . '</guid>';
+    if ($dotgne_lister_pic['description'] != ''){
+      $rssfeed .= '<description>' . $dotgne_lister_pic['description'] . '</description>';
+    }
+    $rssfeed .= '<link>https://photos.tomroyal.com/user/'.$dotgne_acc.'/'.$dotgne_lister_pic['iid'].'/</link>';
+    if ($dotgne_lister_pic['datetaken'] != ""){
+      $rssfeed .= '<pubDate>' . date("D, d M Y H:i:s O", strtotime($dotgne_lister_pic['datetaken'])) . '</pubDate>';    
+    }
+    $rssfeed .= '</item>';
   }
-  $rssfeed .= '</item>';
+  else {
+    // anon item
+    $rssfeed .= '<item>';
+    $rssfeed .= '<title>' . $dotgne_lister_pic['iid'] . '</title>';
+    $rssfeed .= '<guid isPermaLink="false">dotgne' . $dotgne_lister_pic['iid'] . '</guid>';
+    $rssfeed .= '<description>Image ID ' . $dotgne_lister_pic['iid'] . '</description>';
+    $rssfeed .= '<link>https://photos.tomroyal.com/user/'.$dotgne_acc.'/'.$dotgne_lister_pic['iid'].'/</link>';
+    if ($dotgne_lister_pic['datetaken'] != ""){
+      $rssfeed .= '<pubDate>' . date("D, d M Y H:i:s O", strtotime($dotgne_lister_pic['datetaken'])) . '</pubDate>';    
+    }
+    $rssfeed .= '</item>';
+  }  
 }  
 
 // tail rss
