@@ -117,7 +117,7 @@ while($dotgne_lister_pic = pg_fetch_array($rs1)){
     $rssfeed .= '</item>';
   }  
   echo($rssfeed);
-  echo('\r\n');
+  echo("\r\n");
   $rssfeed = '';
 }  
 
