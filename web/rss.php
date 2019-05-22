@@ -62,7 +62,7 @@ else if ($dotgne_logged_in == 1){
   };
 }
 
-error_log('permission view level is '.$dotgne_view_level);
+// error_log('permission view level is '.$dotgne_view_level);
 
 // fetch images
 
@@ -83,7 +83,7 @@ $rssfeed .= '<language>en-gb</language>';
 $rssfeed .= '<atom:link href="https://photos.tomroyal.com/rss/'.$dotgne_acc.'/" rel="self" type="application/rss+xml" />';
 
 echo($rssfeed);
-echo('\r\n');
+echo("\r\n");
 $rssfeed = '';
     
 // loop
