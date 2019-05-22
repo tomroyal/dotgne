@@ -4,6 +4,7 @@ RewriteEngine On
 
 RewriteRule    ^user/([A-Za-z0-9-]+)/([A-Za-z0-9-]+)/?$                                       index.php?u=$1&p=$2      [QSA,NC,L]    # Handle user
 RewriteRule    ^photo/([A-Za-z0-9-]+)/([A-Za-z0-9-]+)/([A-Za-z0-9-]+)/(.*)$   index.php?u=$1&i=$2&p=$3 [QSA,NC,L]    # Handle photo
+RewriteRule    ^rss/([A-Za-z0-9-]+)/?$                       rss.php?u=$1      [QSA,NC,L]    # Handle rss
 RewriteRule    ^login/                                                        login.php           [QSA,NC,L]    
 RewriteRule    ^upload/                                                       upload.php           [QSA,NC,L]
 RewriteRule    ^privacy/                                                       privacy.php           [QSA,NC,L]
