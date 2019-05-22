@@ -80,7 +80,7 @@ $rssfeed .= '<title>My RSS feed</title>';
 $rssfeed .= '<link>https://photos.tomroyal.com/rss/'.$dotgne_acc.'/</link>';
 $rssfeed .= '<description>RSS of photos</description>';
 $rssfeed .= '<language>en-gb</language>';
-$rssfeed .= '<atom:link href="https://photos.tomroyal.com/rss/'.$dotgne_acc.'/" rel="self" type="application/rss+xml" />'
+$rssfeed .= '<atom:link href="https://photos.tomroyal.com/rss/'.$dotgne_acc.'/" rel="self" type="application/rss+xml" />';
     
 // loop
 
