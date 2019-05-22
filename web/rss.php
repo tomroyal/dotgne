@@ -2,6 +2,8 @@
 
 // rss
 
+$dotgne_list_perpage = 50;
+
 require('autoload.php');
 date_default_timezone_set('Europe/London');
 session_start();
@@ -64,8 +66,7 @@ error_log('permission view level is '.$dotgne_view_level);
 
 $pq1 = 'SELECT * FROM dotgne.photos WHERE "iuser" = '.pg_escape_literal($dotgne_acc).'
 ORDER BY "iid" DESC
-LIMIT '.$dotgne_list_perpage.'
-OFFSET '.$dotgne_list_offset;
+LIMIT '.$dotgne_list_perpage;
 $rs1 = pg_query($con, $pq1);
 
 // setup rss
