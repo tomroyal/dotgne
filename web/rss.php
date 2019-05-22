@@ -76,7 +76,7 @@ $rs1 = pg_query($con, $pq1);
 $rssfeed = '<?xml version="1.0" encoding="ISO-8859-1"?>';
 $rssfeed .= '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">';
 $rssfeed .= '<channel>';
-$rssfeed .= '<title>My RSS feed</title>';
+$rssfeed .= '<title>Photos by '.$dotgne_acc_details['uname'].'</title>';
 $rssfeed .= '<link>https://photos.tomroyal.com/rss/'.$dotgne_acc.'/</link>';
 $rssfeed .= '<description>RSS of photos</description>';
 $rssfeed .= '<language>en-gb</language>';
