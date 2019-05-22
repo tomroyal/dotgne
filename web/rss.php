@@ -8,6 +8,8 @@ require('autoload.php');
 date_default_timezone_set('Europe/London');
 session_start();
 
+header("Content-Type: application/rss+xml; charset=ISO-8859-1");
+
 // connect db
 $con = pg_connect(getenv('DATABASE_URL'));
 
@@ -85,9 +87,13 @@ while($dotgne_lister_pic = pg_fetch_array($rs1)){
   // anon item
   $rssfeed .= '<item>';
   $rssfeed .= '<title>' . $dotgne_lister_pic['iid'] . '</title>';
+  $rssfeed .= '<guid>dotgne' . $dotgne_lister_pic['iid'] . '</guid>';
   $rssfeed .= '<description>Image ID ' . $dotgne_lister_pic['iid'] . '</description>';
   $rssfeed .= '<link>https://photos.tomroyal.com/user/'.$dotgne_acc.'/'.$dotgne_lister_pic['iid'].'/</link>';
-  $rssfeed .= '<pubDate>' . date("D, d M Y H:i:s O", strtotime($dotgne_lister_pic['datetaken'])) . '</pubDate>';
+  if ($dotgne_lister_pic['datetaken'] != ""){
+    $rssfeed .= '<pubDate>' . date("D, d M Y H:i:s O", strtotime($dotgne_lister_pic['datetaken'])) . '</pubDate>';
+    
+  }
   $rssfeed .= '</item>';
 }  
 
