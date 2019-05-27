@@ -14,6 +14,8 @@ header("Content-Type: application/rss+xml; charset=ISO-8859-1");
 $con = pg_connect(getenv('DATABASE_URL'));
 
 include('./inc/common_funcs.php');
+include('./inc/get_imgix.php');
+include('./inc/output_funcs.php');
 
 // what user account are we viewing? Default to 0
 $dotgne_acc = 0;
@@ -99,9 +101,7 @@ while($dotgne_lister_pic = pg_fetch_array($rs1)){
       $rssfeed .= '<description>' . $dotgne_lister_pic['description'] . '</description>';
     }
     $rssfeed .= '<link>https://photos.tomroyal.com/photo/'.$dotgne_acc.'/'.$dotgne_lister_pic['iid'].'/1/</link>';
-    if ($dotgne_lister_pic['datetaken'] != ""){
-      $rssfeed .= '<pubDate>' . date("D, d M Y H:i:s O", strtotime($dotgne_lister_pic['datetaken'])) . '</pubDate>';    
-    }
+    $rssfeed .= '<pubDate>' . date("D, d M Y H:i:s O", strtotime($dotgne_lister_pic['dateuploaded'])) . '</pubDate>';    
     $rssfeed .= '</item>';
   }
   else {
@@ -111,9 +111,8 @@ while($dotgne_lister_pic = pg_fetch_array($rs1)){
     $rssfeed .= '<guid isPermaLink="false">dotgne' . $dotgne_lister_pic['iid'] . '</guid>';
     $rssfeed .= '<description>Image ID ' . $dotgne_lister_pic['iid'] . '</description>';
     $rssfeed .= '<link>https://photos.tomroyal.com/photo/'.$dotgne_acc.'/'.$dotgne_lister_pic['iid'].'/1/</link>';
-    if ($dotgne_lister_pic['datetaken'] != ""){
-      $rssfeed .= '<pubDate>' . date("D, d M Y H:i:s O", strtotime($dotgne_lister_pic['datetaken'])) . '</pubDate>';    
-    }
+    $rssfeed .= '<pubDate>' . date("D, d M Y H:i:s O", strtotime($dotgne_lister_pic['dateuploaded'])) . '</pubDate>';  
+    $rssfeed .= '<media:content url="'.get_thumb_fullwidth($dotgne_lister_pic).'" />';  
     $rssfeed .= '</item>';
   }  
   echo($rssfeed);
