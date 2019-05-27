@@ -43,10 +43,10 @@ function output_pic_list($db_resource,$cols,$view_page){
     // start unit
     start_skel_unit($use_cols_text);
     // draw image
-      echo(draw_pic_fullwidth($dotgne_lister_pic));
       $dotgne_view_url = getenv('BASE_URL').'photo/'.$dotgne_lister_pic['iuser'].'/'.$dotgne_lister_pic['iid'].'/'.$view_page.'/';
-      echo('<h4>'.$dotgne_lister_pic['title'].'</h4>');
-      echo('<p><a href="'.$dotgne_view_url.'">View</a></p>');
+      echo('<a href="'.$dotgne_view_url.'">'.draw_pic_fullwidth($dotgne_lister_pic));      
+      echo('<h4>'.$dotgne_lister_pic['title'].'</h4></a>');
+      // echo('<p><a href="'.$dotgne_view_url.'">View</a></p>');
     // close unit
     end_skel_unit();
     // if $cols th unit, close row, reset counter
