@@ -92,7 +92,7 @@ $rssfeed = '';
 
 while($dotgne_lister_pic = pg_fetch_array($rs1)){
   if ($dotgne_lister_pic['privacy'] <= $dotgne_view_level){
-    // anon item
+    // allowed
     $rssfeed .= '<item>';
     $rssfeed .= '<title>' . $dotgne_lister_pic['title'] . '</title>';
     $rssfeed .= '<guid isPermaLink="false">dotgne' . $dotgne_lister_pic['iid'] . '</guid>';
@@ -100,18 +100,18 @@ while($dotgne_lister_pic = pg_fetch_array($rs1)){
       $rssfeed .= '<description>' . $dotgne_lister_pic['description'] . '</description>';
     }
     $rssfeed .= '<link>https://photos.tomroyal.com/photo/'.$dotgne_acc.'/'.$dotgne_lister_pic['iid'].'/1/</link>';
-    $rssfeed .= '<pubDate>' . date("D, d M Y H:i:s O", strtotime($dotgne_lister_pic['dateuploaded'])) . '</pubDate>';   
+    $rssfeed .= '<pubDate>' . date("D, d M Y H:i:s O", strtotime($dotgne_lister_pic['dateuploaded'])) . '</pubDate>'; 
+    $rssfeed .= '<media:content url="'.get_thumb_fullwidth($dotgne_lister_pic).'" />';   
     $rssfeed .= '</item>';
   }
   else {
-    // allowed item
+    // anon
     $rssfeed .= '<item>';
     $rssfeed .= '<title>' . $dotgne_lister_pic['iid'] . '</title>';
     $rssfeed .= '<guid isPermaLink="false">dotgne' . $dotgne_lister_pic['iid'] . '</guid>';
     $rssfeed .= '<description>Image ID ' . $dotgne_lister_pic['iid'] . '</description>';
     $rssfeed .= '<link>https://photos.tomroyal.com/photo/'.$dotgne_acc.'/'.$dotgne_lister_pic['iid'].'/1/</link>';
-    $rssfeed .= '<pubDate>' . date("D, d M Y H:i:s O", strtotime($dotgne_lister_pic['dateuploaded'])) . '</pubDate>';
-    $rssfeed .= '<media:content url="'.get_thumb_fullwidth($dotgne_lister_pic).'" />';     
+    $rssfeed .= '<pubDate>' . date("D, d M Y H:i:s O", strtotime($dotgne_lister_pic['dateuploaded'])) . '</pubDate>';        
     $rssfeed .= '</item>';
   }  
   echo($rssfeed);
