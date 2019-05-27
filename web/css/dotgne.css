@@ -30,6 +30,10 @@ input[type="file"] {
   background-color: lightgoldenrodyellow;
 }
 
+h4 a {
+  text-decoration: none;
+}
+
 /* Progress bars
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 .progress-bar-area {
