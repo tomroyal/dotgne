@@ -101,7 +101,8 @@ while($dotgne_lister_pic = pg_fetch_array($rs1)){
     }
     $rssfeed .= '<link>https://photos.tomroyal.com/photo/'.$dotgne_acc.'/'.$dotgne_lister_pic['iid'].'/1/</link>';
     $rssfeed .= '<pubDate>' . date("D, d M Y H:i:s O", strtotime($dotgne_lister_pic['dateuploaded'])) . '</pubDate>'; 
-    $rssfeed .= '<![CDATA[<media:content url="'.get_thumb_fullwidth($dotgne_lister_pic).'" />]]>';   
+    //$rssfeed .= '<![CDATA[<media:content url="'.get_thumb_fullwidth($dotgne_lister_pic).'" />]]>'; 
+    $rssfeed .= '<thumbnail><![CDATA['.get_thumb_fullwidth($dotgne_lister_pic).']]></thumbnail>';  
     $rssfeed .= '</item>';
   }
   else {
